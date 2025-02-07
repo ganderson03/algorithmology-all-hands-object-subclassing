@@ -4,6 +4,9 @@
 
 # Scope: 
 Inheritance depth: 1 superclass and 9 nested subclasses (total 10)
+
 Mathematical operations: Addition, Multiplication, and Exponentiation
+
 Data structures: Lists containing randomly set values, being floats and integers
+
 Metered by: runtime in reference to time to complete operations
