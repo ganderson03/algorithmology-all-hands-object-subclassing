@@ -93,7 +93,7 @@ class DeepRectangle(DeepSquare):
 
 # Function to measure performance
 def measure_performance():
-    iterations = 100000
+    iterations = 1000000
 
     shapes = [
         (Square(5), "Square (Top)"),
