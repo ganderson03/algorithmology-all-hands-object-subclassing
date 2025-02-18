@@ -1,71 +1,115 @@
 import time
-import sys
+import scalene
 
-# Define the class hierarchy
-class Polygon:
+# Base class
+class Shape:
     def area(self):
         return 0  # Default implementation
 
-class Square(Polygon):
+# Level 1: Square
+class Square(Shape):
     def __init__(self, side_length):
         self.side_length = side_length
-    
+
     def area(self):
         return self.side_length ** 2
 
-class BigSquare(Square):
-    def __init__(self, side_length, scale_factor=1.5):
-        super().__init__(side_length)
-        self.scale_factor = scale_factor
-    
+# Level 2: Rectangle
+class Rectangle(Square):
+    def __init__(self, width, height):
+        super().__init__(width)
+        self.height = height
+
     def area(self):
-        return (self.side_length ** 2) * self.scale_factor
+        return self.side_length * self.height
 
-class LittleSquare(Square):
-    def __init__(self, side_length, factor=0.5):
-        super().__init__(side_length)
-        self.factor = factor
-    
+# Level 3: Circle
+class Circle(Rectangle):
+    def __init__(self, radius):
+        super().__init__(radius, radius)  # Pass same value for width and height
+        self.radius = radius
+
     def area(self):
-        return (self.side_length ** 2) * self.factor
+        return 3.14159 * (self.radius ** 2)
 
+# Level 4: Triangle
+class Triangle(Circle):
+    def __init__(self, base, height):
+        super().__init__(base)  # Pass only base as Circle expects one argument
+        self.base = base
+        self.height = height
 
-# Function to measure performance of object creation and area calculation
+    def area(self):
+        return 0.5 * self.base * self.height
+
+# Level 5: Pentagon
+class Pentagon(Triangle):
+    def __init__(self, side_length):
+        super().__init__(side_length, side_length)  # Pass two identical values
+
+    def area(self):
+        return (5 / 4) * (self.side_length ** 2) / (3.14159 / 5)
+
+# Level 6: Hexagon
+class Hexagon(Pentagon):
+    def __init__(self, side_length):
+        super().__init__(side_length)
+
+    def area(self):
+        return (3 * 3**0.5 / 2) * self.side_length ** 2
+
+# Level 7: Heptagon
+class Heptagon(Hexagon):
+    def __init__(self, side_length):
+        super().__init__(side_length)
+
+    def area(self):
+        return (7 / 4) * (self.side_length ** 2) / (3.14159 / 7)
+
+# Level 8: Octagon
+class Octagon(Heptagon):
+    def __init__(self, side_length):
+        super().__init__(side_length)
+
+    def area(self):
+        return 2 * (1 + 2**0.5) * self.side_length ** 2
+
+# Level 9: DeepSquare (Identical to Square but at the bottom)
+class DeepSquare(Octagon):
+    def __init__(self, side_length):
+        super().__init__(side_length)
+
+    def area(self):
+        return self.side_length ** 2  # Same calculation as Square
+
+# Level 10: DeepRectangle (Identical to Rectangle but at the bottom)
+class DeepRectangle(DeepSquare):
+    def __init__(self, width, height):
+        super().__init__(width)
+        self.height = height
+
+    def area(self):
+        return self.side_length * self.height  # Same calculation as Rectangle
+
+# Function to measure performance
 def measure_performance():
-    # Define the number of iterations for each type of square
     iterations = 100000
 
-    # Measure time for creating and calculating area of a Square
-    start_time = time.time()
-    for _ in range(iterations):
-        square = Square(5)
-        square_area = square.area()
-    square_time = time.time() - start_time
-    print(f"Square: Time for {iterations} iterations: {square_time:.6f} seconds")
-    
-    # Measure time for creating and calculating area of a BigSquare
-    start_time = time.time()
-    for _ in range(iterations):
-        big_square = BigSquare(5)
-        big_square_area = big_square.area()
-    big_square_time = time.time() - start_time
-    print(f"BigSquare: Time for {iterations} iterations: {big_square_time:.6f} seconds")
-    
-    # Measure time for creating and calculating area of a LittleSquare
-    start_time = time.time()
-    for _ in range(iterations):
-        little_square = LittleSquare(5)
-        little_square_area = little_square.area()
-    little_square_time = time.time() - start_time
-    print(f"LittleSquare: Time for {iterations} iterations: {little_square_time:.6f} seconds")
+    shapes = [
+        (Square(5), "Square (Top)"),
+        (Rectangle(5, 10), "Rectangle (Top)"),
+        (DeepSquare(5), "Square (Bottom)"),
+        (DeepRectangle(5, 10), "Rectangle (Bottom)"),
+    ]
 
-    # Measure memory usage of each object (we calculate memory usage for one object)
-    square = Square(5)
-    big_square = BigSquare(5)
-    little_square = LittleSquare(5)
-    print(f"Memory usage of Square object: {sys.getsizeof(square)} bytes")
-    print(f"Memory usage of BigSquare object: {sys.getsizeof(big_square)} bytes")
-    print(f"Memory usage of LittleSquare object: {sys.getsizeof(little_square)} bytes")
+    for shape, name in shapes:
+        start_time = time.time()
+        for _ in range(iterations):
+            _ = shape.area()
+        elapsed_time = time.time() - start_time
+
+        # Print the results
+        print(f"{name}: Time for {iterations} iterations: {elapsed_time:.6f} seconds")
 
 # Running the performance measurement experiment
 measure_performance()
