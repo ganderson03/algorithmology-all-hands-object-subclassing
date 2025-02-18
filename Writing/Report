@@ -1,1 +1,10 @@
-Where we will write our report.
+---
+author: [Coltin Colucci, Grant Anderson, Megan Wolfarth, Javier Benjarno, Willem Bennett]
+title: How is the run time affected by going through a subclassing hierarchy in both a vertical hierarchy and a more horizontal hierarchy?
+page-layout: full
+categories: [post]
+date: "2025-02-18"
+date-format: long
+toc: true
+---
+
