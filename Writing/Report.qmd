@@ -1,6 +1,6 @@
 ---
 author: [Coltin Colucci, Grant Anderson, Javier Benjarno, Megan Wolfarth, Willem Bennett]
-title: How is the run time affected by going through a subclassing hierarchy in both a vertical hierarchy and a more horizontal hierarchy?
+title: How is the run time affected in a vertical and horizontal subclassing hierarchy?
 page-layout: full
 categories: [post, objects, subclasses]
 date: "2025-02-18"
@@ -33,6 +33,12 @@ Using objects and classes in python is a great way to encapsulate both data and 
 ## Implementation
 
 ## Data 
+
+| Class | Container Size | Maximum values | Run 1 | Run 2 | Run 3 |
+|:--------:|:--------------:|:--------------:|:-----:|:-----:|:-----:|
+|      |      |        | []  | []  | []  |
+|     |      |        | []  | []  | []  |
+|       |      |        | []  | []  | []  |
 
 ## Analysis
 
