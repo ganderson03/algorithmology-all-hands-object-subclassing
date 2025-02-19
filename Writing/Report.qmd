@@ -1,5 +1,5 @@
 ---
-author: [Coltin Colucci, Grant Anderson, Megan Wolfarth, Javier Benjarno, Willem Bennett]
+author: [Coltin Colucci, Grant Anderson, Javier Benjarno, Megan Wolfarth, Willem Bennett]
 title: How is the run time affected by going through a subclassing hierarchy in both a vertical hierarchy and a more horizontal hierarchy?
 page-layout: full
 categories: [post, objects, subclasses]
