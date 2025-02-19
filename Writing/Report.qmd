@@ -34,11 +34,21 @@ Using objects and classes in python is a great way to encapsulate both data and 
 
 ## Data 
 
-| Class | Container Size | Maximum values | Run 1 | Run 2 | Run 3 |
-|:--------:|:--------------:|:--------------:|:-----:|:-----:|:-----:|
-|      |      |        | []  | []  | []  |
-|     |      |        | []  | []  | []  |
-|       |      |        | []  | []  | []  |
+### Horizontal Subclasses
+
+| Class | Iterations | Run 1 | Run 2 | Run 3 |
+|:-----:|:----------:|:-----:|:-----:|:-----:|
+|       |            | []    | []    | []    |
+|       |            | []    | []    | []    |
+|       |            | []    | []    | []    |
+
+### Verticle Subclasses
+
+| Class | Level | Iterations | Run 1 | Run 2 | Run 3 |
+|:-----:|:-----:|:----------:|:-----:|:-----:|:-----:|
+|       |       |            | []    | []    | []    |
+|       |       |            | []    | []    | []    |
+|       |       |            | []    | []    | []    |
 
 ## Analysis
 
