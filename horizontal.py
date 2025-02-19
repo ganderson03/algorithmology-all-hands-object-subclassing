@@ -1,5 +1,4 @@
 import time
-import sys
 
 # Base class
 class Shape:
@@ -68,7 +67,7 @@ class Octagon(Shape):
 
 # Function to measure performance
 def measure_performance():
-    iterations = 100000
+    iterations = 10000000
 
     shapes = [
         (Square(5), "Square (Level 1)"),
@@ -87,7 +86,6 @@ def measure_performance():
             _ = shape.area()
         elapsed_time = time.time() - start_time
         print(f"{name}: Time for {iterations} iterations: {elapsed_time:.6f} seconds")
-        print(f"Memory usage of {name} object: {sys.getsizeof(shape)} bytes")
 
 # Running the performance measurement experiment
 measure_performance()

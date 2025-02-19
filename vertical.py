@@ -1,5 +1,4 @@
 import time
-import scalene
 
 # Base class
 class Shape:
@@ -93,7 +92,7 @@ class DeepRectangle(DeepSquare):
 
 # Function to measure performance
 def measure_performance():
-    iterations = 1000000
+    iterations = 10000000
 
     shapes = [
         (Square(5), "Square (Top)"),
