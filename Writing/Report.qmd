@@ -17,8 +17,6 @@ format:
 
 *make sure to delete your below section assignment once you finish/implement your section of the document. thanks.*
 
-Megan : Implementation
-
 Willem : Transfering Data Tables to Report / Measurements
 
 Coltin : Data analysis
