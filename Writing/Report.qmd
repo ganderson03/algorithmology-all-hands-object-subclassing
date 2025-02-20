@@ -15,14 +15,6 @@ format:
 
 ---
 
-*make sure to delete your below section assignment once you finish/implement your section of the document. thanks.*
-
-Willem : Transfering Data Tables to Report / Measurements
-
-Coltin : Data analysis
-
-Javier : Conclusion
-
 
 ## Overview
 

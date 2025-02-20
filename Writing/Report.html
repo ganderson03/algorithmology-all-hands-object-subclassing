@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="Report_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="Report_files/libs/quarto-html/anchor.min.js"></script>
 <link href="Report_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="Report_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="Report_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -92,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#horizontal-subclasses" id="toc-horizontal-subclasses" class="nav-link" data-scroll-target="#horizontal-subclasses">Horizontal Subclasses</a></li>
   <li><a href="#verticle-subclasses" id="toc-verticle-subclasses" class="nav-link" data-scroll-target="#verticle-subclasses">Verticle Subclasses</a></li>
   </ul></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
+  <li><a href="#analysis-of-results" id="toc-analysis-of-results" class="nav-link" data-scroll-target="#analysis-of-results">Analysis of Results</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/ganderson03/algorithmology-all-hands-object-subclassing"><i class="bi bi-github"></i>Github Repository</a></li></ul></div></nav>
@@ -139,10 +139,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><em>make sure to delete your below section assignment once you finish/implement your section of the document. thanks.</em></p>
-<p>Willem : Transfering Data Tables to Report / Measurements</p>
-<p>Coltin : Data analysis</p>
-<p>Javier : Conclusion</p>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>Using objects and classes in python is a great way to encapsulate both data and functionality, while being easy to implement and use. Larger implementations via object oriented programming may require subclass hierarchies with large depth and breadth. This experiment tests how depth and breadth of subclassing can affect running time of a program. The tool calculates the areas of different shapes via different subclasses and measures the time to run throughout to measure the effect of subclass layer depth.</p>
@@ -175,36 +171,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="horizontal-subclasses" class="level3">
 <h3 class="anchored" data-anchor-id="horizontal-subclasses">Horizontal Subclasses</h3>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Class</th>
 <th style="text-align: center;">Iterations</th>
-<th style="text-align: center;">Run 1</th>
-<th style="text-align: center;">Run 2</th>
-<th style="text-align: center;">Run 3</th>
+<th style="text-align: center;">Computer 1</th>
+<th style="text-align: center;">Computer 2</th>
+<th style="text-align: center;">Computer 3</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Square</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.437014, 0.439291, 0.465412]</td>
+<td style="text-align: center;">[0.376381, 0.377706, 0.376821]</td>
+<td style="text-align: center;">[0.861841, 0.911199, 0.840164]</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Rectangle</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.412933, 0.411842, 0.442752]</td>
+<td style="text-align: center;">[0.303293, 0.305012, 0.305012]</td>
+<td style="text-align: center;">[0.694384, 0.732972, 0.714049]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Circle</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.560467, 0.560190, 0.594598]</td>
+<td style="text-align: center;">[0.522940, 0.522017, 0.522017]</td>
+<td style="text-align: center;">[1.122864, 1.021113, 1.136251]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Triangle</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.592885, 0.590606, 0.611711]</td>
+<td style="text-align: center;">[0.527731, 0.531641, 0.531641]</td>
+<td style="text-align: center;">[1.091306, 1.042946, 1.137563]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Pentagon</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.669617, 0.671051, 0.692877]</td>
+<td style="text-align: center;">[0.601187, 0.601641, 0.601641]</td>
+<td style="text-align: center;">[1.192361, 1.208389, 1.201563]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Hexagon</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.558083, 0.555671, 0.593760]</td>
+<td style="text-align: center;">[0.528183, 0.523655, 0.523655]</td>
+<td style="text-align: center;">[0.985421, 0.998305, 1.013470]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Heptagon</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.671177, 0.675468, 0.706550]</td>
+<td style="text-align: center;">[0.587933, 0.598938, 0.598938]</td>
+<td style="text-align: center;">[1.188629, 1.204649, 1.172515]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Octagon</td>
+<td style="text-align: center;">100000</td>
+<td style="text-align: center;">[0.558312, 0.555632, 0.601104]</td>
+<td style="text-align: center;">[0.517227, 0.529137, 0.529137]</td>
+<td style="text-align: center;">[0.985888, 1.020366, 1.145782]</td>
 </tr>
 </tbody>
 </table>
@@ -212,48 +250,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="verticle-subclasses" class="level3">
 <h3 class="anchored" data-anchor-id="verticle-subclasses">Verticle Subclasses</h3>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 10%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Class</th>
 <th style="text-align: center;">Level</th>
 <th style="text-align: center;">Iterations</th>
-<th style="text-align: center;">Run 1</th>
-<th style="text-align: center;">Run 2</th>
-<th style="text-align: center;">Run 3</th>
+<th style="text-align: center;">Computer 1</th>
+<th style="text-align: center;">Computer 2</th>
+<th style="text-align: center;">Computer 3</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Square</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">10000000</td>
+<td style="text-align: center;">[0.437325, 0.438489, 0.425351]</td>
+<td style="text-align: center;">[0.372876, 0.369683, 0.383607]</td>
+<td style="text-align: center;">[0.773531, 0.897097, 0.866563]</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Square</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">10000000</td>
+<td style="text-align: center;">[0.428256, 0.428251, 0.427778]</td>
+<td style="text-align: center;">[0.377128, 0.379158, 0.388889]</td>
+<td style="text-align: center;">[0.790949, 0.906696, 0.903268]</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
+<td style="text-align: center;">Rectangle</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">10000000</td>
+<td style="text-align: center;">[0.412837, 0.411726, 0.411775]</td>
+<td style="text-align: center;">[0.304220, 0.308051, 0.310708]</td>
+<td style="text-align: center;">[0.728893, 0.750396, 0.817389]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Rectangle</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">10000000</td>
+<td style="text-align: center;">[0.412388, 0.413181, 0.411833]</td>
+<td style="text-align: center;">[0.303456, 0.309540, 0.316914]</td>
+<td style="text-align: center;">[0.768824, 0.762135, 0.811588]</td>
 </tr>
 </tbody>
 </table>
 </section>
 </section>
-<section id="analysis" class="level2">
-<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
-<p>In our original hypothesis we figured that the deeper you went into a class hierarchy structure the more that the run time would be affected. However when we actually ran the experiment we found that python has some pretty neat features working in the background to prevent this from happening.</p>
+<section id="analysis-of-results" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-results">Analysis of Results</h2>
+<p>Our data shows that generally our times have little deviation that are not accounted for by the base complexity of getting the area of each polygon. The results from the horizontal subclassing show that the time taken for each shape is relatively consistent across different computers, with minor variations due to the inherent differences in hardware performance. Similarly, the results from the vertical subclassing indicate that the depth of the hierarchy does not significantly impact the runtime, as the times for the top-level and bottom-level classes are quite similar.</p>
+<p>This consistency in runtime can be attributed to Python’s efficient method resolution order (MRO) and its optimization techniques, which ensure that method lookups and attribute accesses are performed quickly, regardless of the depth of the class hierarchy. Therefore, our hypothesis that deeper hierarchies would result in longer runtimes was not supported by the experimental data.</p>
 <ul>
 <li><p><strong>Dynamic Method Resolution</strong> Dynamic Method Resolution means that when a method is called python looks up the class where the object was instantiated at and checks the class hierarchy dynamically at run time. The lookup is very fast and does not include any special overhead for deeper hierarchies.</p></li>
 <li><p><strong>Inheritance Lookup Overhead</strong> Python caches method resolution for an instance. If you have a deeper hierarchy python still only performs the lookup once as if the class were flat.</p></li>
@@ -350,8 +405,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -462,7 +515,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
