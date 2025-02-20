@@ -2,18 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Coltin Colucci">
 <meta name="author" content="Grant Anderson">
-<meta name="author" content="Megan Wolfarth">
 <meta name="author" content="Javier Benjarno">
+<meta name="author" content="Megan Wolfarth">
 <meta name="author" content="Willem Bennett">
 <meta name="dcterms.date" content="2025-02-18">
 
-<title>How is the run time affected by going through a subclassing hierarchy in both a vertical hierarchy and a more horizontal hierarchy?</title>
+<title>How is the run time affected in a vertical and horizontal subclassing hierarchy?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="Report_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="Report_files/libs/quarto-html/anchor.min.js"></script>
 <link href="Report_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Report_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="Report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Report_files/libs/bootstrap/bootstrap-8a79a254b8e706d3c925cde0a310d4f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -87,7 +87,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#horizontal-subclasses" id="toc-horizontal-subclasses" class="nav-link" data-scroll-target="#horizontal-subclasses">Horizontal Subclasses</a></li>
+  <li><a href="#verticle-subclasses" id="toc-verticle-subclasses" class="nav-link" data-scroll-target="#verticle-subclasses">Verticle Subclasses</a></li>
+  </ul></li>
   <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -97,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">How is the run time affected by going through a subclassing hierarchy in both a vertical hierarchy and a more horizontal hierarchy?</h1>
+<h1 class="title">How is the run time affected in a vertical and horizontal subclassing hierarchy?</h1>
   <div class="quarto-categories">
     <div class="quarto-category">post</div>
     <div class="quarto-category">objects</div>
@@ -114,8 +118,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title-meta-contents">
              <p>Coltin Colucci </p>
              <p>Grant Anderson </p>
-             <p>Megan Wolfarth </p>
              <p>Javier Benjarno </p>
+             <p>Megan Wolfarth </p>
              <p>Willem Bennett </p>
           </div>
   </div>
@@ -136,7 +140,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>make sure to delete your below section assignment once you finish/implement your section of the document. thanks.</em></p>
-<p>Megan : Implementation</p>
 <p>Willem : Transfering Data Tables to Report / Measurements</p>
 <p>Coltin : Data analysis</p>
 <p>Javier : Conclusion</p>
@@ -146,70 +149,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation" class="level2">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Level 1: Square, Rectangle, Circle, Triangle, Pentagon, Hexagon, Heptagon, Octagon</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Square(Shape):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side_length):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.side_length <span class="op">=</span> side_length</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.side_length <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Rectangle(Shape):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, width, height):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.width <span class="op">=</span> width</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.height <span class="op">=</span> height</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.width <span class="op">*</span> <span class="va">self</span>.height</span>
+<p>For our experiment, we set up two inheritance hierarchies to test how runtime is affected by a deep (vertical) hierarchy compared to a wide (horizontal) hierarchy. Both of these hierarchies were polygon-based, where each subclass calculated the area of a different shape. For the vertical hierarchy, each class was inherited from the class above it for a total of ten subclasses and ten levels. For the horizontal hierarchy, each class was a subclass of a single base class for one level eight wide. In order to test runtime for the vertical hierarchy, we created two classes, square and rectangle, at the top of the hierarchy, and recreated those two classes at the bottom of the hierarchy. We then instantiated those four classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation. To test runtime for the horizontal hierarchy, we created eight subclasses, all inherited from the <code>Shape</code> base class. We then instantiated those eight classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation.</p>
+<p>The <code>measure_performance</code> function is the function we used to determine the runtime for classes in the horizontal and vertical hierarchies. To determine the runtime, the function ran 10,000,000 iterations for each class, using the <code>time</code> module to determine the elapsed time by subtracting the start time from the end time.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> measure_performance():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    iterations <span class="op">=</span> <span class="dv">10000000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    shapes <span class="op">=</span> [</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        (Square(<span class="dv">5</span>), <span class="st">"Square (Top)"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        (Rectangle(<span class="dv">5</span>, <span class="dv">10</span>), <span class="st">"Rectangle (Top)"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        (DeepSquare(<span class="dv">5</span>), <span class="st">"Square (Bottom)"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        (DeepRectangle(<span class="dv">5</span>, <span class="dv">10</span>), <span class="st">"Rectangle (Bottom)"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> shape, name <span class="kw">in</span> shapes:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        start_time <span class="op">=</span> time.time()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            _ <span class="op">=</span> shape.area()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        elapsed_time <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circle(Shape):</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, radius):</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.radius <span class="op">=</span> radius</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">3.14159</span> <span class="op">*</span> (<span class="va">self</span>.radius <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Triangle(Shape):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, base, height):</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base <span class="op">=</span> base</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.height <span class="op">=</span> height</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.base <span class="op">*</span> <span class="va">self</span>.height</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Pentagon(Shape):</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side_length):</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.side_length <span class="op">=</span> side_length</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="dv">5</span> <span class="op">/</span> <span class="dv">4</span>) <span class="op">*</span> (<span class="va">self</span>.side_length <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="fl">3.14159</span> <span class="op">/</span> <span class="dv">5</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Hexagon(Shape):</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side_length):</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.side_length <span class="op">=</span> side_length</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span><span class="op">**</span><span class="fl">0.5</span> <span class="op">/</span> <span class="dv">2</span>) <span class="op">*</span> <span class="va">self</span>.side_length <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Heptagon(Shape):</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side_length):</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.side_length <span class="op">=</span> side_length</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="dv">7</span> <span class="op">/</span> <span class="dv">4</span>) <span class="op">*</span> (<span class="va">self</span>.side_length <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="fl">3.14159</span> <span class="op">/</span> <span class="dv">7</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Octagon(Shape):</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side_length):</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.side_length <span class="op">=</span> side_length</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="fl">0.5</span>) <span class="op">*</span> <span class="va">self</span>.side_length <span class="op">**</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the results</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: Time for </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss"> iterations: </span><span class="sc">{</span>elapsed_time<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="horizontal-subclasses" class="level3">
+<h3 class="anchored" data-anchor-id="horizontal-subclasses">Horizontal Subclasses</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Class</th>
+<th style="text-align: center;">Iterations</th>
+<th style="text-align: center;">Run 1</th>
+<th style="text-align: center;">Run 2</th>
+<th style="text-align: center;">Run 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="verticle-subclasses" class="level3">
+<h3 class="anchored" data-anchor-id="verticle-subclasses">Verticle Subclasses</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Class</th>
+<th style="text-align: center;">Level</th>
+<th style="text-align: center;">Iterations</th>
+<th style="text-align: center;">Run 1</th>
+<th style="text-align: center;">Run 2</th>
+<th style="text-align: center;">Run 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<p>In our original hypothesis we figured that the deeper you went into a class hierarchy structure the more that the run time would be affected. However when we actually ran the experiment we found that python has some pretty neat features working in the background to prevent this from happening.</p>
+<ul>
+<li><p><strong>Dynamic Method Resolution</strong> Dynamic Method Resolution means that when a method is called python looks up the class where the object was instantiated at and checks the class hierarchy dynamically at run time. The lookup is very fast and does not include any special overhead for deeper hierarchies.</p></li>
+<li><p><strong>Inheritance Lookup Overhead</strong> Python caches method resolution for an instance. If you have a deeper hierarchy python still only performs the lookup once as if the class were flat.</p></li>
+<li><p><strong>Attribute Lookup</strong> In our example calculating the area of the shapes was our attribute. We did see a difference in run time when the area calculation was more complex for certain shapes however, this was still minimal and didn’t compact with how deep in the class structure each shape necessarily was.</p></li>
+<li><p><strong>Python’s Optimization</strong> All of the features listed above come to help us to better explain or results. Python is extremely optimized for tasks such as moving through class hierarchies and that is why our results showed little to no difference the deeper you go into these hierarchies.</p></li>
+<li><p><strong>Other Languages</strong> Looking deeper into the topic of class hierarchy overhead it actually does play a factor in other languages. In C particularly there is no support for classes or inheritance without any additional features. You would have to manually implement them using structs function pointers or other manual techniques. This means that you would not benefit from any of the optimizations that do exist in python. Languages such as Rust and Go also lack these optimizations. Running a similar experiment in those languages may give you a different result than in python due to this.</p></li>
+</ul>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -299,6 +350,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -409,6 +462,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

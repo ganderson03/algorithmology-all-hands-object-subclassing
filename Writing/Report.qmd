@@ -74,5 +74,27 @@ def measure_performance():
 |       |       |            | []    | []    | []    |
 
 ## Analysis
+In our original hypothesis we figured that the deeper you went into a class hierarchy structure the more that the run time would be affected. However when we actually ran the experiment we found that python has some pretty neat features working in the background to prevent this from happening.
+
+
+*  **Dynamic Method Resolution**
+Dynamic Method Resolution means that when a method is called python looks up the class where the object was instantiated at and checks the class hierarchy dynamically at run time. The lookup is very fast and does not include any special overhead for deeper hierarchies.
+
+
+* **Inheritance Lookup Overhead**
+Python caches method resolution for an instance. If you have a deeper hierarchy python still only performs the lookup once as if the class were flat.
+
+
+* **Attribute Lookup**
+In our example calculating the area of the shapes was our attribute. We did see a difference in run time when the area calculation was more complex for certain shapes however, this was still minimal and didn't compact with how deep in the class structure each shape necessarily was.
+
+
+* **Python's Optimization**
+All of the features listed above come to help us to better explain or results. Python is extremely optimized for tasks such as moving through class hierarchies and that is why our results showed little to no difference the deeper you go into these hierarchies.
+
+
+* **Other Languages**
+Looking deeper into the topic of class hierarchy overhead it actually does play a factor in other languages. In C particularly there is no support for  classes or inheritance without any additional features. You would have to manually implement them using structs function pointers or other manual techniques. This means that you would not benefit from any of the optimizations that do exist in python. Languages such as Rust and Go also lack these optimizations. Running a similar experiment in those languages may give you a different result than in python due to this.
+
 
 ## Conclusion
