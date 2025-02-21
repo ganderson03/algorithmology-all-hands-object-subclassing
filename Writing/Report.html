@@ -8,7 +8,7 @@
 
 <meta name="author" content="Coltin Colucci">
 <meta name="author" content="Grant Anderson">
-<meta name="author" content="Javier Benjarno">
+<meta name="author" content="Javier Bejarano">
 <meta name="author" content="Megan Wolfarth">
 <meta name="author" content="Willem Bennett">
 <meta name="dcterms.date" content="2025-02-18">
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title-meta-contents">
              <p>Coltin Colucci </p>
              <p>Grant Anderson </p>
-             <p>Javier Benjarno </p>
+             <p>Javier Bejarano </p>
              <p>Megan Wolfarth </p>
              <p>Willem Bennett </p>
           </div>
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="implementation" class="level2">
 <h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<p>For our experiment, we set up two inheritance hierarchies to test how runtime is affected by a deep (vertical) hierarchy compared to a wide (horizontal) hierarchy. Both of these hierarchies were polygon-based, where each subclass calculated the area of a different shape. For the vertical hierarchy, each class was inherited from the class above it for a total of ten subclasses and ten levels. For the horizontal hierarchy, each class was a subclass of a single base class for one level eight wide. In order to test runtime for the vertical hierarchy, we created two classes, square and rectangle, at the top of the hierarchy, and recreated those two classes at the bottom of the hierarchy. We then instantiated those four classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation. To test runtime for the horizontal hierarchy, we created eight subclasses, all inherited from the <code>Shape</code> base class. We then instantiated those eight classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation.</p>
+<p>For our experiment, we set up two inheritance hierarchies to determine how runtime is affected by a deep (vertical) hierarchy compared to a wide (horizontal) hierarchy. Both of these hierarchies were polygon-based, where each subclass calculated the area of a different shape. For the vertical hierarchy, each class was inherited from the class above it for a total of ten subclasses and ten levels. For the horizontal hierarchy, each class was a subclass of a single base class for one level eight wide. In order to determine runtime for the vertical hierarchy, we created two classes, square and rectangle, at the top of the hierarchy, and recreated those two classes at the bottom of the hierarchy. We then instantiated those four classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation. To determine runtime for the horizontal hierarchy, we created eight subclasses, all inherited from the <code>Shape</code> base class. We then instantiated those eight classes and used the <code>time</code> module in the <code>measure_performance</code> function to determine the runtime for each instantiation.</p>
 <p>The <code>measure_performance</code> function is the function we used to determine the runtime for classes in the horizontal and vertical hierarchies. To determine the runtime, the function ran 10,000,000 iterations for each class, using the <code>time</code> module to determine the elapsed time by subtracting the start time from the end time.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> measure_performance():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    iterations <span class="op">=</span> <span class="dv">10000000</span></span>
@@ -319,6 +319,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In our experiment, we wanted to see if making a class hierarchy deeper (more levels of inheritance) would slow down a program in Python. We thought that if a class had to go through many layers to find a function, it would take more time. But when we tested it, we found out that this wasn’t really true!</p>
+<p>Python is smart. It has a way of remembering where to find things (called method resolution order or MRO), so it doesn’t need to keep searching every time. Even if a class is deep down in a long chain of inheritance, Python still finds the function quickly. It also saves some of this information to make future lookups even faster.</p>
+<p>We tested two different types of class structures:<br>
+1. <strong>A deep hierarchy (vertical)</strong> – This means we had a base class, and then many subclasses stacked on top of each other, each inheriting from the one before.<br>
+2. <strong>A wide hierarchy (horizontal)</strong> – This means we had one base class, but many subclasses that all inherited directly from it, like branches on a tree.</p>
+<p>We ran our code millions of times and measured how long it took. The results showed that both deep and wide hierarchies took about the same amount of time to run. This means that in Python, making a class deeper doesn’t really slow things down.</p>
+<p>Python is different from some other programming languages. In languages like C or Rust, inheritance is not built-in the same way, so deep hierarchies might work differently or even cause problems. But in Python, the way it looks up functions is super optimized, so depth doesn’t slow it down much.</p>
+<p>If someone is writing code in Python, they don’t need to worry about whether their class structure is deep or wide. Both will work just fine! However, it’s still a good idea to keep things simple and organized, because too many layers can make code harder to read and understand.</p>
+<p>In the end, we learned that Python is pretty efficient at handling classes, and our original guess was wrong! That’s why testing and experimenting is important—it helps us learn the truth instead of just guessing.</p>
 </section>
 
 </main>
