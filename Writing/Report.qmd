@@ -100,18 +100,18 @@ Looking deeper into the topic of class hierarchy overhead it actually does play 
 
 ## Conclusion
 
-In our experiment, we wanted to see if making a class hierarchy deeper (more levels of inheritance) would slow down a program in Python. We thought that if a class had to go through many layers to find a function, it would take more time. But when we tested it, we found out that this wasn’t really true!  
+In our experiment, we wanted to see if making a class hierarchy deeper (more levels of inheritance) would slow down a program in Python. We thought that if a class had to go through many layers to find a function, it would take more time. But when we tested it, we found out that this wasn’t really true.  
 
-Python is smart. It has a way of remembering where to find things (called method resolution order or MRO), so it doesn’t need to keep searching every time. Even if a class is deep down in a long chain of inheritance, Python still finds the function quickly. It also saves some of this information to make future lookups even faster.  
+Python is smart. It has a way of remember where to find things, so it doesn’t need to keep searching every time. Even if a class is deep down in a long chain of inheritance, Python still finds the function quickly. It also saves some of this information to make future times even faster.  
 
 We tested two different types of class structures:  
-1. **A deep hierarchy (vertical)** – This means we had a base class, and then many subclasses stacked on top of each other, each inheriting from the one before.  
-2. **A wide hierarchy (horizontal)** – This means we had one base class, but many subclasses that all inherited directly from it, like branches on a tree.  
+1. **Vertical** – You start with one base class at the top, and each new class is built in top of each other. Each class gets more specific. For example: Animal (base class), Mammal (subclass), Dog (subclass of Mammal)
+2. **Horizontal** – You start with one base class at the top, and then you create several subclasses, all of them coming from the same base. They don’t come from each other. For example: Shape (base class), Circle, Square, Triangle (all of them coming from the base class 'Shape'). 
 
-We ran our code millions of times and measured how long it took. The results showed that both deep and wide hierarchies took about the same amount of time to run. This means that in Python, making a class deeper doesn’t really slow things down.  
+We ran our code a lot of times and measured how long it took. The results showed that both deep and wide hierarchies took about the same amount of time to run. This means that in Python, making a class deeper doesn’t really slow things down.  
 
-Python is different from some other programming languages. In languages like C or Rust, inheritance is not built-in the same way, so deep hierarchies might work differently or even cause problems. But in Python, the way it looks up functions is super optimized, so depth doesn’t slow it down much.  
+Python is different from some other programming languages. In languages like C or Java, inheritance is not built-in the same way, so deep hierarchies might work differently or even cause problems. But in Python, the way it looks up functions is super optimized, so depth doesn’t slow it down much.  
 
-If someone is writing code in Python, they don’t need to worry about whether their class structure is deep or wide. Both will work just fine! However, it’s still a good idea to keep things simple and organized, because too many layers can make code harder to read and understand.  
+If someone is writing code in Python, they don’t need to worry about whether their class structure is deep or wide. However, it’s still a good idea to keep things simple and organized.
 
-In the end, we learned that Python is pretty efficient at handling classes, and our original guess was wrong! That’s why testing and experimenting is important—it helps us learn the truth instead of just guessing.
+Overall, we learned that Python is super efficient when it comes to classes. Some of you guys might think this project was a failure because we didn’t find any evidence to support our guesses, but in my opinion, it went even better than expected. None of us were right! Not a single guess was correct! Isn’t that crazy?
